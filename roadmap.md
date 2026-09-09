@@ -1,0 +1,4 @@
+- [ ] Build shared JustBay design system, demo data, and storefront shell
+- [ ] Build customer discovery and product pages
+- [ ] Build cart, checkout, tracking, and account pages
+- [ ] Validate key flows and responsive layouts
