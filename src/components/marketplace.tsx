@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, BadgeCheck, Heart, MapPin, Search, ShoppingBag, Star } from "lucide-react";
+import { ArrowRight, BadgeCheck, Heart, MapPin, Search, ShoppingBag, Star, type LucideIcon } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { formatNaira, type Product } from "../lib/catalog";
 import { useShop } from "../lib/shop-context";
@@ -43,7 +43,8 @@ export function ProductCard({ product, dark = false }: { product: Product; dark?
 }
 
 export function TrustStrip() {
-  return <section className="grid gap-px overflow-hidden rounded-[2rem] bg-border md:grid-cols-3">{[
+  const items: Array<[LucideIcon, string, string]> = [
     [BadgeCheck, "Trusted sellers", "Every featured store is verified"], [ShoppingBag, "Buyer protection", "Shop with confidence on every order"], [MapPin, "Local delivery", "Clear estimates across the South East"],
-  ].map(([Icon, title, copy]) => <div key={String(title)} className="bg-surface p-7"><Icon className="mb-6 size-6 text-brand-strong" /><h3 className="font-display text-xl font-bold">{title as string}</h3><p className="mt-2 text-sm text-muted-foreground">{copy as string}</p></div>)}</section>;
+  ];
+  return <section className="grid gap-px overflow-hidden rounded-[2rem] bg-border md:grid-cols-3">{items.map(([Icon, title, copy]) => <div key={title} className="bg-surface p-7"><Icon className="mb-6 size-6 text-brand-strong" /><h3 className="font-display text-xl font-bold">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{copy}</p></div>)}</section>;
 }
