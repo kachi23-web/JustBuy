@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { ListingPage } from "../components/pages";
+export const Route = createFileRoute("/products")({ head:()=>({meta:[{title:"Shop Products — JustBay"},{name:"description",content:"Explore trusted products and local deals on JustBay."},{property:"og:title",content:"Shop Products — JustBay"},{property:"og:description",content:"Explore trusted products and local deals on JustBay."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:()=> <ListingPage /> });

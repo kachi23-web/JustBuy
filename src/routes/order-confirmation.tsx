@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { OrderConfirmationPage } from "../components/pages";
+export const Route = createFileRoute("/order-confirmation")({ head:()=>({meta:[{title:"Order Confirmed — JustBay"},{name:"description",content:"Your JustBay demo order is confirmed."},{property:"og:title",content:"Order Confirmed — JustBay"},{property:"og:description",content:"Your order has been received."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:OrderConfirmationPage });

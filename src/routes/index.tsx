@@ -1,24 +1,26 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Clock3, MapPin, Sparkles, Star } from "lucide-react";
+import heroImage from "../assets/justbay-hero.jpg";
+import { categories, products } from "../lib/catalog";
+import { ProductCard, SectionTitle, TrustStrip } from "../components/marketplace";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({ meta: [{ title: "JustBay — Shop local across Eastern Nigeria" }, { name: "description", content: "Shop trusted local sellers, everyday essentials and great deals with delivery across Eastern Nigeria." }, { property: "og:title", content: "JustBay — Everything you need, right around the corner" }, { property: "og:description", content: "Trusted sellers, clear prices and local delivery across Eastern Nigeria." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+const wrap = "mx-auto w-full max-w-[1440px] px-4 md:px-8";
+const primary = "inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand px-6 text-sm font-bold text-brand-foreground transition hover:bg-brand/85";
+
+function HomePage() {
+  return <>
+    <section className={`${wrap} pt-5 md:pt-8`}><div className="relative min-h-[620px] overflow-hidden rounded-[2rem] bg-dark text-dark-foreground md:min-h-[680px] md:rounded-[2.5rem]"><img src={heroImage} alt="A selection of fashion, electronics, beauty and grocery products available on JustBay" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover object-[63%_center] opacity-75 md:object-center" /><div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/75 to-transparent" /><div className="relative z-10 flex min-h-[620px] max-w-3xl flex-col justify-end p-6 pb-10 md:min-h-[680px] md:justify-center md:p-14 lg:p-20"><span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-dark-foreground/20 bg-dark/25 px-4 py-2 text-xs font-bold backdrop-blur"><MapPin className="size-3.5 text-brand" /> Made for Eastern Nigeria</span><h1 className="font-display text-5xl font-extrabold leading-[1.02] md:text-7xl lg:text-8xl">Everything you need.<br/><span className="text-brand">Right around the corner.</span></h1><p className="mt-6 max-w-xl text-base leading-relaxed text-dark-foreground/70 md:text-lg">Shop products from trusted sellers across Eastern Nigeria and get them delivered to your doorstep.</p><div className="mt-8 flex flex-wrap gap-3"><Link to="/products" className={primary}>Shop now <ArrowRight className="size-4" /></Link><Link to="/category/$category" params={{ category: "all" }} className="inline-flex min-h-12 items-center rounded-full border border-dark-foreground/25 px-6 text-sm font-bold">Explore categories</Link></div></div></div></section>
+    <section className={`${wrap} py-16 md:py-24`}><SectionTitle eyebrow="Find your everyday" title="Shop by category" action={<Link to="/category/$category" params={{category:"all"}} className="text-sm font-bold">View all</Link>} /><div className="flex gap-3 overflow-x-auto pb-3">{categories.map((category,index) => <Link key={category} to="/category/$category" params={{category:category.toLowerCase()}} className="flex min-w-36 flex-col rounded-[1.5rem] bg-surface p-5 transition hover:-translate-y-1"><span className="mb-8 grid size-11 place-items-center rounded-full bg-brand/25 font-display font-extrabold">0{index+1}</span><b className="font-display">{category}</b><span className="mt-1 text-xs text-muted-foreground">Explore now</span></Link>)}</div></section>
+    <section className="bg-dark py-16 text-dark-foreground md:py-20"><div className={wrap}><div className="mb-7 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4"><div><p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-brand"><Sparkles className="size-4" /> Flash sale</p><h2 className="font-display text-3xl font-bold md:text-5xl">Big deals. Small window.</h2></div><div className="hidden items-center gap-2 rounded-full bg-dark-foreground/10 px-4 py-2 text-sm font-bold sm:flex"><Clock3 className="size-4 text-accent" />02 : 41 : 08</div></div><div className="grid grid-cols-2 gap-4 md:grid-cols-4">{products.slice(0,4).map((product) => <ProductCard key={product.id} product={product} dark />)}</div></div></section>
+    <section className={`${wrap} py-16 md:py-24`}><SectionTitle eyebrow="📍 Awka, Anambra" title="Popular near you" action={<Link to="/products" className="text-sm font-bold">See all</Link>} /><p className="-mt-3 mb-8 text-sm text-muted-foreground">Products people around Awka are buying right now.</p><div className="grid grid-cols-2 gap-4 md:grid-cols-4">{products.slice(4,8).map((product) => <ProductCard key={product.id} product={product} />)}</div></section>
+    <section className={`${wrap} pb-20`}><SectionTitle eyebrow="Local favourites" title="Shop from trusted sellers" /><div className="grid gap-4 md:grid-cols-3">{[["ABC Electronics","Awka","4.9"],["Nwaanyị Styles","Onitsha","4.8"],["Amara Beauty Room","Enugu","4.7"]].map(([name,city,rating],index) => <Link to="/stores" key={name} className="group rounded-[2rem] bg-surface p-7"><div className="flex items-start justify-between"><span className="grid size-16 place-items-center rounded-2xl bg-brand font-display text-2xl font-extrabold">{name[0]}</span><ArrowRight className="size-5 transition group-hover:translate-x-1" /></div><h3 className="mt-10 font-display text-2xl font-bold">{name}</h3><p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="size-4" /> {city}<Star className="ml-2 size-4 fill-warning text-warning" /> {rating}</p><p className="mt-4 text-xs font-bold text-success">✓ JustBay Verified</p></Link>)}</div></section>
+    <section className={`${wrap} pb-20`}><TrustStrip /></section>
+    <section className={`${wrap} pb-8`}><div className="overflow-hidden rounded-[2.5rem] bg-brand p-7 md:p-14"><p className="text-xs font-bold uppercase">Shop with confidence</p><div className="mt-4 grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end"><h2 className="max-w-3xl font-display text-4xl font-extrabold md:text-6xl">Local shopping, made simpler.</h2><Link to="/products" className="inline-flex size-14 items-center justify-center rounded-full bg-dark text-dark-foreground" aria-label="Start shopping"><ArrowRight /></Link></div></div></section>
+    <footer className={`${wrap} py-8`}><div className="rounded-[2.5rem] bg-dark p-8 text-dark-foreground md:p-12"><div className="grid gap-10 md:grid-cols-2"><div><p className="font-display text-3xl font-extrabold">Just<span className="text-brand">Bay</span></p><p className="mt-4 max-w-sm text-sm text-dark-foreground/55">The trusted digital marketplace for Eastern Nigeria.</p></div><div className="grid grid-cols-2 gap-6 text-sm"><div className="space-y-3"><b>Shop</b><Link to="/products" className="block text-dark-foreground/55">All products</Link><Link to="/stores" className="block text-dark-foreground/55">Local sellers</Link></div><div className="space-y-3"><b>Help</b><Link to="/help" className="block text-dark-foreground/55">Support</Link><Link to="/track-order" className="block text-dark-foreground/55">Track order</Link></div></div></div><div className="mt-12 border-t border-dark-foreground/10 pt-6 text-xs text-dark-foreground/45">© 2026 JustBay. Interactive marketplace demo.</div></div></footer>
+  </>;
 }
