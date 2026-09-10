@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { CartPage } from "../components/pages";
+export const Route = createFileRoute("/cart")({ head:()=>({meta:[{title:"Your Cart — JustBay"},{name:"description",content:"Review your JustBay cart and proceed to checkout."},{property:"og:title",content:"Your Cart — JustBay"},{property:"og:description",content:"Review your selected JustBay products."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:CartPage });

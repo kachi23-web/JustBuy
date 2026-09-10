@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { OrderTrackingPage } from "../components/pages";
+export const Route = createFileRoute("/track-order")({ head:()=>({meta:[{title:"Track Order — JustBay"},{name:"description",content:"Follow each stage of your JustBay delivery."},{property:"og:title",content:"Track Order — JustBay"},{property:"og:description",content:"Track your local marketplace delivery."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:OrderTrackingPage });

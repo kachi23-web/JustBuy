@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { CheckoutPage } from "../components/pages";
+export const Route = createFileRoute("/checkout")({ head:()=>({meta:[{title:"Checkout — JustBay"},{name:"description",content:"Complete a demo JustBay checkout with local delivery options."},{property:"og:title",content:"Checkout — JustBay"},{property:"og:description",content:"Simple local delivery and payment choices."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:CheckoutPage });
