@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { AccountPage } from "../components/pages";
+export const Route = createFileRoute("/wishlist")({ head:()=>({meta:[{title:"My Wishlist — JustBay"},{name:"description",content:"Products you saved on JustBay."},{property:"og:title",content:"My Wishlist — JustBay"},{property:"og:description",content:"Products you saved on JustBay."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:()=><AccountPage section="wishlist" /> });
