@@ -139,7 +139,7 @@ function SiteShell({ children }: { children: ReactNode }) {
       <div className="mx-auto max-w-[1520px] rounded-full border border-border/70 bg-surface/85 px-4 py-2 shadow-soft backdrop-blur-xl">
         <div className="grid h-12 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 md:gap-6">
           <Logo />
-          <nav aria-label="Main navigation" className="hidden items-center gap-6 text-sm font-semibold lg:flex"><Link to="/category/$category" params={{ category: "all" }}>Categories</Link><Link to="/products">Deals</Link><Link to="/stores">Stores</Link></nav>
+          <nav aria-label="Main navigation" className="hidden items-center gap-6 text-sm font-semibold lg:flex"><Link to="/category/$category" params={{ category: "all" }}>Categories</Link><Link to="/products">Deals</Link><Link to="/stores">Stores</Link><Link to="/sell" className="text-brand-strong">Sell on JustBay</Link></nav>
           <div className="hidden min-w-0 md:block"><SearchBar compact /></div>
           <div className="flex shrink-0 items-center gap-1">
             <Link to="/wishlist" aria-label={`Wishlist with ${wishlist.length} items`} className="hidden size-10 place-items-center rounded-full hover:bg-surface-muted sm:grid"><Heart className="size-5" /></Link>
