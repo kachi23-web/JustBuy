@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { AuthPage } from "../components/pages";
+export const Route = createFileRoute("/login")({ head:()=>({meta:[{title:"Sign In — JustBay"},{name:"description",content:"Sign in to your JustBay account."},{property:"og:title",content:"Sign In — JustBay"},{property:"og:description",content:"Sign in to your JustBay account."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:()=><AuthPage mode="login" /> });
