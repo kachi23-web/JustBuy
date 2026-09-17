@@ -131,9 +131,8 @@ function RootComponent() {
 
 function SiteShell({ children }: { children: ReactNode }) {
   const { cartCount, wishlist } = useShop();
-  const mobileLinks: Array<{ to: "/" | "/category/$category" | "/search" | "/cart" | "/account"; params?: { category: string }; icon: LucideIcon; label: string }> = [
-    { to: "/", icon: Home, label: "Home" }, { to: "/category/$category", params: { category: "all" }, icon: LayoutGrid, label: "Categories" }, { to: "/search", icon: Search, label: "Search" }, { to: "/cart", icon: ShoppingBag, label: "Cart" }, { to: "/account", icon: UserRound, label: "Account" },
-  ];
+  const mobileItem = "flex min-w-0 flex-col items-center gap-1 py-1 text-[10px] font-semibold";
+  const MobileLabel = ({ icon: Icon, label }: { icon: LucideIcon; label: string }) => <><Icon className="size-5" /><span className="truncate">{label}</span></>;
   return <div className="min-h-screen bg-background text-foreground">
     <header className="sticky top-0 z-50 px-3 pt-3 md:px-6">
       <div className="mx-auto max-w-[1520px] rounded-full border border-border/70 bg-surface/85 px-4 py-2 shadow-soft backdrop-blur-xl">
