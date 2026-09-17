@@ -3,5 +3,5 @@
 - [x] Build cart, checkout, tracking, and account pages
 - [x] Build customer login, register, forgot password, orders, addresses, notifications, help pages
 - [x] Build seller registration, dashboard, add product, orders
-- [ ] Build admin pages (dashboard, users, sellers, products, orders)
-- [ ] Validate key flows and responsive layouts
+- [x] Build admin pages (dashboard, users, sellers, products, orders)
+- [x] Validate key flows and responsive layouts
