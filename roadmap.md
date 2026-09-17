@@ -1,4 +1,7 @@
-- [ ] Build shared JustBay design system, demo data, and storefront shell
-- [ ] Build customer discovery and product pages
-- [ ] Build cart, checkout, tracking, and account pages
-- [ ] Validate key flows and responsive layouts
+- [x] Build shared JustBay design system, demo data, and storefront shell
+- [x] Build customer discovery and product pages
+- [x] Build cart, checkout, tracking, and account pages
+- [x] Build customer login, register, forgot password, orders, addresses, notifications, help pages
+- [x] Build seller registration, dashboard, add product, orders
+- [x] Build admin pages (dashboard, users, sellers, products, orders)
+- [x] Validate key flows and responsive layouts

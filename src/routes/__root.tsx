@@ -131,9 +131,8 @@ function RootComponent() {
 
 function SiteShell({ children }: { children: ReactNode }) {
   const { cartCount, wishlist } = useShop();
-  const mobileLinks: Array<{ to: "/" | "/category/$category" | "/search" | "/cart" | "/account"; params?: { category: string }; icon: LucideIcon; label: string }> = [
-    { to: "/", icon: Home, label: "Home" }, { to: "/category/$category", params: { category: "all" }, icon: LayoutGrid, label: "Categories" }, { to: "/search", icon: Search, label: "Search" }, { to: "/cart", icon: ShoppingBag, label: "Cart" }, { to: "/account", icon: UserRound, label: "Account" },
-  ];
+  const mobileItem = "flex min-w-0 flex-col items-center gap-1 py-1 text-[10px] font-semibold";
+  const MobileLabel = ({ icon: Icon, label }: { icon: LucideIcon; label: string }) => <><Icon className="size-5" /><span className="truncate">{label}</span></>;
   return <div className="min-h-screen bg-background text-foreground">
     <header className="sticky top-0 z-50 px-3 pt-3 md:px-6">
       <div className="mx-auto max-w-[1520px] rounded-full border border-border/70 bg-surface/85 px-4 py-2 shadow-soft backdrop-blur-xl">
@@ -151,6 +150,12 @@ function SiteShell({ children }: { children: ReactNode }) {
       <div className="mx-auto mt-2 flex max-w-[1520px] items-center gap-2 px-3 text-xs text-muted-foreground md:hidden"><MapPin className="size-3.5 text-brand-strong" /> Delivering to <b className="text-foreground">Awka, Anambra</b></div>
     </header>
     <main className="pb-24 md:pb-8">{children}</main>
-    <nav aria-label="Mobile navigation" className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 rounded-[1.4rem] border border-border bg-surface/95 px-2 py-2 shadow-soft backdrop-blur-xl md:hidden">{mobileLinks.map(({ to, params, icon: Icon, label }) => <Link key={label} to={to} params={params} className="flex min-w-0 flex-col items-center gap-1 py-1 text-[10px] font-semibold"><Icon className="size-5" /><span className="truncate">{label}</span></Link>)}</nav>
+    <nav aria-label="Mobile navigation" className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 rounded-[1.4rem] border border-border bg-surface/95 px-2 py-2 shadow-soft backdrop-blur-xl md:hidden">
+      <Link to="/" className={mobileItem}><MobileLabel icon={Home} label="Home" /></Link>
+      <Link to="/category/$category" params={{ category: "all" }} className={mobileItem}><MobileLabel icon={LayoutGrid} label="Categories" /></Link>
+      <Link to="/search" search={{ q: "all" }} className={mobileItem}><MobileLabel icon={Search} label="Search" /></Link>
+      <Link to="/cart" className={mobileItem}><MobileLabel icon={ShoppingBag} label="Cart" /></Link>
+      <Link to="/account" className={mobileItem}><MobileLabel icon={UserRound} label="Account" /></Link>
+    </nav>
   </div>;
 }
