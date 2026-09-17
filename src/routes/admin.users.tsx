@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { AdminUsersPage } from "../components/admin";
+export const Route = createFileRoute("/admin/users")({ head:()=>({meta:[{title:"Shoppers — JustBay Admin"},{name:"description",content:"Manage JustBay shoppers and their account status."},{property:"og:title",content:"Shoppers — JustBay Admin"},{property:"og:description",content:"Manage JustBay shoppers and their account status."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:AdminUsersPage });
