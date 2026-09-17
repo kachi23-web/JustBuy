@@ -150,6 +150,12 @@ function SiteShell({ children }: { children: ReactNode }) {
       <div className="mx-auto mt-2 flex max-w-[1520px] items-center gap-2 px-3 text-xs text-muted-foreground md:hidden"><MapPin className="size-3.5 text-brand-strong" /> Delivering to <b className="text-foreground">Awka, Anambra</b></div>
     </header>
     <main className="pb-24 md:pb-8">{children}</main>
-    <nav aria-label="Mobile navigation" className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 rounded-[1.4rem] border border-border bg-surface/95 px-2 py-2 shadow-soft backdrop-blur-xl md:hidden">{mobileLinks.map(({ to, params, icon: Icon, label }) => <Link key={label} to={to} params={params} className="flex min-w-0 flex-col items-center gap-1 py-1 text-[10px] font-semibold"><Icon className="size-5" /><span className="truncate">{label}</span></Link>)}</nav>
+    <nav aria-label="Mobile navigation" className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 rounded-[1.4rem] border border-border bg-surface/95 px-2 py-2 shadow-soft backdrop-blur-xl md:hidden">
+      <Link to="/" className={mobileItem}><MobileLabel icon={Home} label="Home" /></Link>
+      <Link to="/category/$category" params={{ category: "all" }} className={mobileItem}><MobileLabel icon={LayoutGrid} label="Categories" /></Link>
+      <Link to="/search" className={mobileItem}><MobileLabel icon={Search} label="Search" /></Link>
+      <Link to="/cart" className={mobileItem}><MobileLabel icon={ShoppingBag} label="Cart" /></Link>
+      <Link to="/account" className={mobileItem}><MobileLabel icon={UserRound} label="Account" /></Link>
+    </nav>
   </div>;
 }
