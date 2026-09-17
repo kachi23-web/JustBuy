@@ -153,7 +153,7 @@ function SiteShell({ children }: { children: ReactNode }) {
     <nav aria-label="Mobile navigation" className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 rounded-[1.4rem] border border-border bg-surface/95 px-2 py-2 shadow-soft backdrop-blur-xl md:hidden">
       <Link to="/" className={mobileItem}><MobileLabel icon={Home} label="Home" /></Link>
       <Link to="/category/$category" params={{ category: "all" }} className={mobileItem}><MobileLabel icon={LayoutGrid} label="Categories" /></Link>
-      <Link to="/search" className={mobileItem}><MobileLabel icon={Search} label="Search" /></Link>
+      <Link to="/search" search={{ q: "all" }} className={mobileItem}><MobileLabel icon={Search} label="Search" /></Link>
       <Link to="/cart" className={mobileItem}><MobileLabel icon={ShoppingBag} label="Cart" /></Link>
       <Link to="/account" className={mobileItem}><MobileLabel icon={UserRound} label="Account" /></Link>
     </nav>
