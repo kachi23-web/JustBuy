@@ -79,8 +79,8 @@ const orders = [
 export function AdminDashboardPage() {
   const catalog = useCatalog();
   const stats: Array<[typeof Wallet, string, string]> = [
-    [Wallet, formatNaira(3480000), "Marketplace sales (30 days)"],
-    [Users, String(users.length * 312), "Registered shoppers"],
+    [Wallet, formatNaira(9240500), "Marketplace sales (30 days)"],
+    [Users, "4,812", "Registered shoppers"],
     [Store, String(sellers.length), "Active sellers"],
     [Box, String(catalog.length), "Live products"],
   ];
@@ -88,10 +88,10 @@ export function AdminDashboardPage() {
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map(([Icon, value, label]) => <div key={label} className={card}><Icon className="size-5 text-brand-strong" /><p className="mt-6 font-display text-2xl font-bold">{value}</p><p className="text-sm text-muted-foreground">{label}</p></div>)}</div>
     <div className="mt-6 grid gap-4 md:grid-cols-2">
       <div className={card}><TrendingUp className="size-5 text-brand-strong" /><h2 className="mt-5 font-display text-xl font-bold">Top cities</h2><ul className="mt-4 space-y-3 text-sm">{[["Awka", "38%"], ["Onitsha", "24%"], ["Enugu", "19%"], ["Owerri", "12%"], ["Aba", "7%"]].map(([city, share]) => <li key={city}><div className="flex justify-between"><span>{city}</span><b>{share}</b></div><div className="mt-1 h-2 rounded-full bg-surface-muted"><div className="h-2 rounded-full bg-brand" style={{ width: share }} /></div></li>)}</ul></div>
-      <div className={card}><ShieldCheck className="size-5 text-brand-strong" /><h2 className="mt-5 font-display text-xl font-bold">Needs attention</h2><ul className="mt-4 space-y-3 text-sm"><li className="flex items-center justify-between">1 seller awaiting verification <Link to="/admin/sellers" className="font-bold underline">Review</Link></li><li className="flex items-center justify-between">1 refund requested <Link to="/admin/orders" className="font-bold underline">Open</Link></li><li className="flex items-center justify-between">1 suspended shopper <Link to="/admin/users" className="font-bold underline">View</Link></li></ul></div>
+      <div className={card}><ShieldCheck className="size-5 text-brand-strong" /><h2 className="mt-5 font-display text-xl font-bold">Needs attention</h2><ul className="mt-4 space-y-3 text-sm"><li className="flex items-center justify-between">2 sellers awaiting verification <Link to="/admin/sellers" className="font-bold underline">Review</Link></li><li className="flex items-center justify-between">1 refund requested <Link to="/admin/orders" className="font-bold underline">Open</Link></li><li className="flex items-center justify-between">1 suspended shopper <Link to="/admin/users" className="font-bold underline">View</Link></li></ul></div>
     </div>
     <h2 className="mb-4 mt-10 font-display text-2xl font-bold">Latest orders</h2>
-    <Table head={["Order", "Buyer", "Seller", "Total", "Status"]} rows={orders.slice(0, 3).map((order) => [order.id, order.buyer, order.seller, formatNaira(order.total), <Pill key={order.id} label={order.status} tone={order.status === "Delivered" ? "neutral" : order.status === "Processing" ? "good" : "warn"} />])} />
+    <Table head={["Order", "Buyer", "Seller", "Total", "Status"]} rows={orders.slice(0, 5).map((order) => [order.id, order.buyer, order.seller, formatNaira(order.total), <Pill key={order.id} label={order.status} tone={order.status === "Delivered" ? "neutral" : order.status === "Processing" ? "good" : "warn"} />])} />
   </AdminShell>;
 }
 
