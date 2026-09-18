@@ -14,7 +14,203 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      addresses: {
+        Row: {
+          area: string | null
+          building: string | null
+          city: string
+          created_at: string
+          full_name: string
+          id: string
+          instructions: string | null
+          is_default: boolean
+          label: string | null
+          landmark: string | null
+          phone: string
+          state: string
+          street: string
+          user_id: string
+        }
+        Insert: {
+          area?: string | null
+          building?: string | null
+          city: string
+          created_at?: string
+          full_name: string
+          id?: string
+          instructions?: string | null
+          is_default?: boolean
+          label?: string | null
+          landmark?: string | null
+          phone: string
+          state: string
+          street: string
+          user_id: string
+        }
+        Update: {
+          area?: string | null
+          building?: string | null
+          city?: string
+          created_at?: string
+          full_name?: string
+          id?: string
+          instructions?: string | null
+          is_default?: boolean
+          label?: string | null
+          landmark?: string | null
+          phone?: string
+          state?: string
+          street?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      order_items: {
+        Row: {
+          id: string
+          image: string | null
+          name: string
+          order_id: string
+          product_id: string
+          quantity: number
+          seller: string
+          unit_price: number
+        }
+        Insert: {
+          id?: string
+          image?: string | null
+          name: string
+          order_id: string
+          product_id: string
+          quantity?: number
+          seller: string
+          unit_price: number
+        }
+        Update: {
+          id?: string
+          image?: string | null
+          name?: string
+          order_id?: string
+          product_id?: string
+          quantity?: number
+          seller?: string
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          area: string | null
+          building: string | null
+          city: string
+          created_at: string
+          delivery_fee: number
+          delivery_method: string
+          email: string
+          full_name: string
+          id: string
+          instructions: string | null
+          landmark: string | null
+          payment_method: string
+          payment_reference: string | null
+          payment_status: string
+          phone: string
+          reference: string
+          state: string
+          status: string
+          street: string
+          subtotal: number
+          total: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          area?: string | null
+          building?: string | null
+          city: string
+          created_at?: string
+          delivery_fee?: number
+          delivery_method?: string
+          email: string
+          full_name: string
+          id?: string
+          instructions?: string | null
+          landmark?: string | null
+          payment_method?: string
+          payment_reference?: string | null
+          payment_status?: string
+          phone: string
+          reference: string
+          state: string
+          status?: string
+          street: string
+          subtotal: number
+          total: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          area?: string | null
+          building?: string | null
+          city?: string
+          created_at?: string
+          delivery_fee?: number
+          delivery_method?: string
+          email?: string
+          full_name?: string
+          id?: string
+          instructions?: string | null
+          landmark?: string | null
+          payment_method?: string
+          payment_reference?: string | null
+          payment_status?: string
+          phone?: string
+          reference?: string
+          state?: string
+          status?: string
+          street?: string
+          subtotal?: number
+          total?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          city: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
