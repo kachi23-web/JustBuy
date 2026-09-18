@@ -42,26 +42,45 @@ const users = [
   { name: "Chinedu Okafor", city: "Awka", joined: "12 Sep 2026", orders: 4, status: "Active" },
   { name: "Adaeze Nwosu", city: "Enugu", joined: "08 Sep 2026", orders: 2, status: "Active" },
   { name: "Emeka Obi", city: "Onitsha", joined: "01 Sep 2026", orders: 7, status: "Active" },
+  { name: "Ifeoma Chukwu", city: "Awka", joined: "30 Aug 2026", orders: 11, status: "Active" },
+  { name: "Uchenna Nnaji", city: "Aba", joined: "24 Aug 2026", orders: 3, status: "Active" },
+  { name: "Blessing Agu", city: "Abakaliki", joined: "19 Aug 2026", orders: 5, status: "Active" },
+  { name: "Obinna Eze", city: "Owerri", joined: "11 Aug 2026", orders: 9, status: "Active" },
   { name: "Ngozi Eze", city: "Owerri", joined: "27 Aug 2026", orders: 0, status: "Suspended" },
 ];
 const sellers = [
   { store: "ABC Electronics", city: "Awka", products: 120, rating: 4.9, status: "Verified" },
+  { store: "Kamsi Mobile Hub", city: "Awka", products: 98, rating: 4.8, status: "Verified" },
+  { store: "Eke Awka Foodstuff", city: "Awka", products: 74, rating: 4.8, status: "Verified" },
   { store: "Nwaanyị Styles", city: "Onitsha", products: 86, rating: 4.8, status: "Verified" },
+  { store: "Ogbunike Computers", city: "Onitsha", products: 52, rating: 4.7, status: "Verified" },
+  { store: "Obosi Fresh Market", city: "Onitsha", products: 63, rating: 4.9, status: "Verified" },
   { store: "Amara Beauty Room", city: "Enugu", products: 64, rating: 4.7, status: "Verified" },
+  { store: "Coal City Electronics", city: "Enugu", products: 41, rating: 4.6, status: "Verified" },
+  { store: "Owerri Home Centre", city: "Owerri", products: 57, rating: 4.7, status: "Verified" },
+  { store: "Chidera Naturals", city: "Owerri", products: 29, rating: 4.9, status: "Verified" },
+  { store: "Ariaria Leather Works", city: "Aba", products: 44, rating: 4.8, status: "Verified" },
   { store: "Aba Footwear Co.", city: "Aba", products: 31, rating: 4.5, status: "Pending review" },
+  { store: "Abakaliki Home Store", city: "Abakaliki", products: 22, rating: 4.4, status: "Pending review" },
 ];
 const orders = [
+  { id: "JB-24118", buyer: "Ifeoma Chukwu", seller: "Eke Awka Foodstuff", total: 32500, status: "Processing" },
+  { id: "JB-24115", buyer: "Obinna Eze", seller: "Owerri Home Centre", total: 68500, status: "Out for delivery" },
+  { id: "JB-24109", buyer: "Emeka Obi", seller: "Ogbunike Computers", total: 745000, status: "Processing" },
+  { id: "JB-24104", buyer: "Uchenna Nnaji", seller: "Ariaria Leather Works", total: 27500, status: "Delivered" },
+  { id: "JB-24098", buyer: "Blessing Agu", seller: "Coal City Electronics", total: 268000, status: "Out for delivery" },
   { id: "JB-24091", buyer: "Chinedu Okafor", seller: "ABC Electronics", total: 45000, status: "Processing" },
   { id: "JB-24088", buyer: "Adaeze Nwosu", seller: "Amara Beauty Room", total: 24500, status: "Out for delivery" },
   { id: "JB-24080", buyer: "Emeka Obi", seller: "Nwaanyị Styles", total: 38500, status: "Delivered" },
+  { id: "JB-24076", buyer: "Ifeoma Chukwu", seller: "Chidera Naturals", total: 8900, status: "Delivered" },
   { id: "JB-24075", buyer: "Ngozi Eze", seller: "Owerri Device Store", total: 198000, status: "Refund requested" },
 ];
 
 export function AdminDashboardPage() {
   const catalog = useCatalog();
   const stats: Array<[typeof Wallet, string, string]> = [
-    [Wallet, formatNaira(3480000), "Marketplace sales (30 days)"],
-    [Users, String(users.length * 312), "Registered shoppers"],
+    [Wallet, formatNaira(9240500), "Marketplace sales (30 days)"],
+    [Users, "4,812", "Registered shoppers"],
     [Store, String(sellers.length), "Active sellers"],
     [Box, String(catalog.length), "Live products"],
   ];
@@ -69,10 +88,10 @@ export function AdminDashboardPage() {
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map(([Icon, value, label]) => <div key={label} className={card}><Icon className="size-5 text-brand-strong" /><p className="mt-6 font-display text-2xl font-bold">{value}</p><p className="text-sm text-muted-foreground">{label}</p></div>)}</div>
     <div className="mt-6 grid gap-4 md:grid-cols-2">
       <div className={card}><TrendingUp className="size-5 text-brand-strong" /><h2 className="mt-5 font-display text-xl font-bold">Top cities</h2><ul className="mt-4 space-y-3 text-sm">{[["Awka", "38%"], ["Onitsha", "24%"], ["Enugu", "19%"], ["Owerri", "12%"], ["Aba", "7%"]].map(([city, share]) => <li key={city}><div className="flex justify-between"><span>{city}</span><b>{share}</b></div><div className="mt-1 h-2 rounded-full bg-surface-muted"><div className="h-2 rounded-full bg-brand" style={{ width: share }} /></div></li>)}</ul></div>
-      <div className={card}><ShieldCheck className="size-5 text-brand-strong" /><h2 className="mt-5 font-display text-xl font-bold">Needs attention</h2><ul className="mt-4 space-y-3 text-sm"><li className="flex items-center justify-between">1 seller awaiting verification <Link to="/admin/sellers" className="font-bold underline">Review</Link></li><li className="flex items-center justify-between">1 refund requested <Link to="/admin/orders" className="font-bold underline">Open</Link></li><li className="flex items-center justify-between">1 suspended shopper <Link to="/admin/users" className="font-bold underline">View</Link></li></ul></div>
+      <div className={card}><ShieldCheck className="size-5 text-brand-strong" /><h2 className="mt-5 font-display text-xl font-bold">Needs attention</h2><ul className="mt-4 space-y-3 text-sm"><li className="flex items-center justify-between">2 sellers awaiting verification <Link to="/admin/sellers" className="font-bold underline">Review</Link></li><li className="flex items-center justify-between">1 refund requested <Link to="/admin/orders" className="font-bold underline">Open</Link></li><li className="flex items-center justify-between">1 suspended shopper <Link to="/admin/users" className="font-bold underline">View</Link></li></ul></div>
     </div>
     <h2 className="mb-4 mt-10 font-display text-2xl font-bold">Latest orders</h2>
-    <Table head={["Order", "Buyer", "Seller", "Total", "Status"]} rows={orders.slice(0, 3).map((order) => [order.id, order.buyer, order.seller, formatNaira(order.total), <Pill key={order.id} label={order.status} tone={order.status === "Delivered" ? "neutral" : order.status === "Processing" ? "good" : "warn"} />])} />
+    <Table head={["Order", "Buyer", "Seller", "Total", "Status"]} rows={orders.slice(0, 5).map((order) => [order.id, order.buyer, order.seller, formatNaira(order.total), <Pill key={order.id} label={order.status} tone={order.status === "Delivered" ? "neutral" : order.status === "Processing" ? "good" : "warn"} />])} />
   </AdminShell>;
 }
 

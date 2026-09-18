@@ -5,3 +5,5 @@
 - [x] Build seller registration, dashboard, add product, orders
 - [x] Build admin pages (dashboard, users, sellers, products, orders)
 - [x] Validate key flows and responsive layouts
+
+- [ ] Real checkout: card + bank transfer payments, orders saved (needs Cloud + payments provider)
