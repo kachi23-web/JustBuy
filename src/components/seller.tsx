@@ -83,6 +83,10 @@ function SellerShell({ title, action, children }: { title: string; action?: Reac
 }
 
 const demoOrders = [
+  { id: "JB-24118", buyer: "Ifeoma Chukwu", item: "Golden Harvest Parboiled Rice 10kg", city: "Awka", total: 32500, status: "Processing" },
+  { id: "JB-24115", buyer: "Obinna Eze", item: "18\" Rechargeable Standing Fan", city: "Owerri", total: 68500, status: "Out for delivery" },
+  { id: "JB-24109", buyer: "Emeka Obi", item: "ZenBook Slim Core i5 Laptop", city: "Onitsha", total: 745000, status: "Processing" },
+  { id: "JB-24104", buyer: "Uchenna Nnaji", item: "Aba Leather Tote Handbag", city: "Aba", total: 27500, status: "Delivered" },
   { id: "JB-24091", buyer: "Chinedu Okafor", item: "Airwave Pro Headphones", city: "Awka", total: 45000, status: "Processing" },
   { id: "JB-24088", buyer: "Adaeze Nwosu", item: "Daily Glow Skincare Set", city: "Enugu", total: 24500, status: "Out for delivery" },
   { id: "JB-24080", buyer: "Emeka Obi", item: "Everyday Court Sneakers", city: "Onitsha", total: 38500, status: "Delivered" },
@@ -91,7 +95,7 @@ const demoOrders = [
 export function SellerDashboardPage() {
   const { listings, removeListing, seller } = useShop();
   const stats: Array<[typeof Wallet, string, string]> = [
-    [Wallet, formatNaira(108000), "Earnings this week"],
+    [Wallet, formatNaira(486300), "Earnings this week"],
     [Package, String(demoOrders.length), "Orders received"],
     [Box, String(listings.length), "Live listings"],
     [TrendingUp, "4.8", "Store rating"],
