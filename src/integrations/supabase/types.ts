@@ -74,6 +74,8 @@ export type Database = {
           product_id: string
           quantity: number
           seller: string
+          status: string
+          store_id: string | null
           unit_price: number
         }
         Insert: {
@@ -84,6 +86,8 @@ export type Database = {
           product_id: string
           quantity?: number
           seller: string
+          status?: string
+          store_id?: string | null
           unit_price: number
         }
         Update: {
@@ -94,6 +98,8 @@ export type Database = {
           product_id?: string
           quantity?: number
           seller?: string
+          status?: string
+          store_id?: string | null
           unit_price?: number
         }
         Relationships: [
@@ -102,6 +108,13 @@ export type Database = {
             columns: ["order_id"]
             isOneToOne: false
             referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
             referencedColumns: ["id"]
           },
         ]
@@ -184,6 +197,65 @@ export type Database = {
         }
         Relationships: []
       }
+      products: {
+        Row: {
+          category: string
+          city: string
+          created_at: string
+          delivery: string | null
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+          old_price: number | null
+          price: number
+          status: string
+          stock: number
+          store_id: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          city: string
+          created_at?: string
+          delivery?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          old_price?: number | null
+          price: number
+          status?: string
+          stock?: number
+          store_id: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          city?: string
+          created_at?: string
+          delivery?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          old_price?: number | null
+          price?: number
+          status?: string
+          stock?: number
+          store_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "stores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           city: string | null
@@ -208,6 +280,51 @@ export type Database = {
           id?: string
           phone?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      stores: {
+        Row: {
+          category: string | null
+          city: string
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          owner_id: string
+          owner_name: string | null
+          phone: string | null
+          rating: number
+          updated_at: string
+          verified: boolean
+        }
+        Insert: {
+          category?: string | null
+          city: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          owner_id: string
+          owner_name?: string | null
+          phone?: string | null
+          rating?: number
+          updated_at?: string
+          verified?: boolean
+        }
+        Update: {
+          category?: string | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          owner_id?: string
+          owner_name?: string | null
+          phone?: string | null
+          rating?: number
+          updated_at?: string
+          verified?: boolean
         }
         Relationships: []
       }

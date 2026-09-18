@@ -7,3 +7,4 @@
 - [x] Validate key flows and responsive layouts
 
 - [ ] Real checkout: card + bank transfer payments, orders saved (needs Cloud + payments provider)
+- [ ] Seller backend: real stores, products and orders with persistence (no demo data)
