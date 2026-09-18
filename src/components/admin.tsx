@@ -42,18 +42,37 @@ const users = [
   { name: "Chinedu Okafor", city: "Awka", joined: "12 Sep 2026", orders: 4, status: "Active" },
   { name: "Adaeze Nwosu", city: "Enugu", joined: "08 Sep 2026", orders: 2, status: "Active" },
   { name: "Emeka Obi", city: "Onitsha", joined: "01 Sep 2026", orders: 7, status: "Active" },
+  { name: "Ifeoma Chukwu", city: "Awka", joined: "30 Aug 2026", orders: 11, status: "Active" },
+  { name: "Uchenna Nnaji", city: "Aba", joined: "24 Aug 2026", orders: 3, status: "Active" },
+  { name: "Blessing Agu", city: "Abakaliki", joined: "19 Aug 2026", orders: 5, status: "Active" },
+  { name: "Obinna Eze", city: "Owerri", joined: "11 Aug 2026", orders: 9, status: "Active" },
   { name: "Ngozi Eze", city: "Owerri", joined: "27 Aug 2026", orders: 0, status: "Suspended" },
 ];
 const sellers = [
   { store: "ABC Electronics", city: "Awka", products: 120, rating: 4.9, status: "Verified" },
+  { store: "Kamsi Mobile Hub", city: "Awka", products: 98, rating: 4.8, status: "Verified" },
+  { store: "Eke Awka Foodstuff", city: "Awka", products: 74, rating: 4.8, status: "Verified" },
   { store: "Nwaanyị Styles", city: "Onitsha", products: 86, rating: 4.8, status: "Verified" },
+  { store: "Ogbunike Computers", city: "Onitsha", products: 52, rating: 4.7, status: "Verified" },
+  { store: "Obosi Fresh Market", city: "Onitsha", products: 63, rating: 4.9, status: "Verified" },
   { store: "Amara Beauty Room", city: "Enugu", products: 64, rating: 4.7, status: "Verified" },
+  { store: "Coal City Electronics", city: "Enugu", products: 41, rating: 4.6, status: "Verified" },
+  { store: "Owerri Home Centre", city: "Owerri", products: 57, rating: 4.7, status: "Verified" },
+  { store: "Chidera Naturals", city: "Owerri", products: 29, rating: 4.9, status: "Verified" },
+  { store: "Ariaria Leather Works", city: "Aba", products: 44, rating: 4.8, status: "Verified" },
   { store: "Aba Footwear Co.", city: "Aba", products: 31, rating: 4.5, status: "Pending review" },
+  { store: "Abakaliki Home Store", city: "Abakaliki", products: 22, rating: 4.4, status: "Pending review" },
 ];
 const orders = [
+  { id: "JB-24118", buyer: "Ifeoma Chukwu", seller: "Eke Awka Foodstuff", total: 32500, status: "Processing" },
+  { id: "JB-24115", buyer: "Obinna Eze", seller: "Owerri Home Centre", total: 68500, status: "Out for delivery" },
+  { id: "JB-24109", buyer: "Emeka Obi", seller: "Ogbunike Computers", total: 745000, status: "Processing" },
+  { id: "JB-24104", buyer: "Uchenna Nnaji", seller: "Ariaria Leather Works", total: 27500, status: "Delivered" },
+  { id: "JB-24098", buyer: "Blessing Agu", seller: "Coal City Electronics", total: 268000, status: "Out for delivery" },
   { id: "JB-24091", buyer: "Chinedu Okafor", seller: "ABC Electronics", total: 45000, status: "Processing" },
   { id: "JB-24088", buyer: "Adaeze Nwosu", seller: "Amara Beauty Room", total: 24500, status: "Out for delivery" },
   { id: "JB-24080", buyer: "Emeka Obi", seller: "Nwaanyị Styles", total: 38500, status: "Delivered" },
+  { id: "JB-24076", buyer: "Ifeoma Chukwu", seller: "Chidera Naturals", total: 8900, status: "Delivered" },
   { id: "JB-24075", buyer: "Ngozi Eze", seller: "Owerri Device Store", total: 198000, status: "Refund requested" },
 ];
 
