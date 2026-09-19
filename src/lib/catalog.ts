@@ -8,6 +8,8 @@ import bagImage from "../assets/product-bag.jpg";
 import homeImage from "../assets/product-home.jpg";
 
 export type Product = {
+  /** Set when the listing comes from a real seller store in the database. */
+  storeId?: string;
   id: string;
   name: string;
   category: string;
