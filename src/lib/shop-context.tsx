@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { products as demoProducts, type Product } from "./catalog";
+import { fetchLiveProducts } from "./db";
 
 export type SellerProfile = { store: string; owner: string; phone: string; city: string; category: string };
 
