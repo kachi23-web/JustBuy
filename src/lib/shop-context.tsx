@@ -63,7 +63,10 @@ export function ShopProvider({ children }: { children: ReactNode }) {
     addListing: (product) => setListings((current) => [product, ...current]),
     removeListing: (id) => setListings((current) => current.filter((item) => item.id !== id)),
     cartCount: Object.values(cart).reduce((sum, quantity) => sum + quantity, 0),
-  }), [cart, wishlist, listings, seller]);
+    liveProducts,
+    refreshCatalog,
+    clearCart: () => setCart({}),
+  }), [cart, wishlist, listings, seller, liveProducts, refreshCatalog]);
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 }
@@ -74,8 +77,8 @@ export function useShop() {
   return value;
 }
 
-/** Seller listings created in this session, shown alongside the sample catalogue. */
+/** Real seller listings from the database, shown alongside the sample catalogue. */
 export function useCatalog(): Product[] {
-  const { listings } = useShop();
-  return useMemo(() => [...listings, ...demoProducts], [listings]);
+  const { listings, liveProducts } = useShop();
+  return useMemo(() => [...liveProducts, ...listings, ...demoProducts], [liveProducts, listings]);
 }
