@@ -33,6 +33,7 @@ export type DbProduct = {
 /** Map a stored listing (plus its store) into the shared shop product shape. */
 export function toProduct(row: DbProduct & { stores?: { name: string; verified: boolean } | null }): Product {
   return {
+    storeId: row.store_id,
     id: row.id,
     name: row.name,
     category: row.category,
