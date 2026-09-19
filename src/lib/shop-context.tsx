@@ -16,6 +16,9 @@ type ShopState = {
   addListing: (product: Product) => void;
   removeListing: (id: string) => void;
   cartCount: number;
+  liveProducts: Product[];
+  refreshCatalog: () => Promise<void>;
+  clearCart: () => void;
 };
 
 const ShopContext = createContext<ShopState | undefined>(undefined);
@@ -39,6 +42,10 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => { sessionStorage.setItem("justbay-shop", JSON.stringify({ cart, wishlist, listings, seller })); }, [cart, wishlist, listings, seller]);
+
+  const [liveProducts, setLiveProducts] = useState<Product[]>([]);
+  const refreshCatalog = useCallback(async () => { setLiveProducts(await fetchLiveProducts()); }, []);
+  useEffect(() => { void refreshCatalog(); }, [refreshCatalog]);
 
   const value = useMemo<ShopState>(() => ({
     cart,
