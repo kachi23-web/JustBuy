@@ -1,8 +1,11 @@
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, BadgeCheck, Bell, Check, ChevronRight, CircleHelp, CreditCard, Heart, MapPin, Minus, Package, Plus, Search, ShieldCheck, SlidersHorizontal, Star, Store, Truck, UserRound } from "lucide-react";
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { categories, formatNaira, products } from "../lib/catalog";
 import { useCatalog, useShop } from "../lib/shop-context";
+import { useAuth, signOut } from "../lib/auth";
+import { fetchMyOrders, type MyOrder } from "../lib/db";
+import { supabase } from "@/integrations/supabase/client";
 import { ProductCard, SearchBar, SectionTitle, TrustStrip } from "./marketplace";
 
 const wrap = "mx-auto w-full max-w-[1440px] px-4 py-10 md:px-8 md:py-16";
