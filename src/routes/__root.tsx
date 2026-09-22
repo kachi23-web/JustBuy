@@ -10,9 +10,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ShopProvider, useShop } from "../lib/shop-context";
-import { Logo, SearchBar } from "../components/marketplace";
+import { Footer, Logo, SearchBar } from "../components/marketplace";
 import { Heart, Home, LayoutGrid, MapPin, Search, ShoppingBag, UserRound, type LucideIcon } from "lucide-react";
 
 function NotFoundComponent() {
@@ -41,7 +40,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    console.error(error);
   }, [error]);
 
   return (
@@ -150,6 +149,7 @@ function SiteShell({ children }: { children: ReactNode }) {
       <div className="mx-auto mt-2 flex max-w-[1520px] items-center gap-2 px-3 text-xs text-muted-foreground md:hidden"><MapPin className="size-3.5 text-brand-strong" /> Delivering to <b className="text-foreground">Awka, Anambra</b></div>
     </header>
     <main className="pb-24 md:pb-8">{children}</main>
+    <Footer />
     <nav aria-label="Mobile navigation" className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 rounded-[1.4rem] border border-border bg-surface/95 px-2 py-2 shadow-soft backdrop-blur-xl md:hidden">
       <Link to="/" className={mobileItem}><MobileLabel icon={Home} label="Home" /></Link>
       <Link to="/category/$category" params={{ category: "all" }} className={mobileItem}><MobileLabel icon={LayoutGrid} label="Categories" /></Link>

@@ -48,3 +48,42 @@ export function TrustStrip() {
   ];
   return <section className="grid gap-px overflow-hidden rounded-[2rem] bg-border md:grid-cols-3">{items.map(([Icon, title, copy]) => <div key={title} className="bg-surface p-7"><Icon className="mb-6 size-6 text-brand-strong" /><h3 className="font-display text-xl font-bold">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{copy}</p></div>)}</section>;
 }
+
+const wrap = "mx-auto w-full max-w-[1440px] px-4 md:px-8";
+
+export function Footer() {
+  return (
+    <footer className={`${wrap} py-8`}>
+      <div className="rounded-[2.5rem] bg-dark p-8 text-dark-foreground md:p-12">
+        <div className="grid gap-10 md:grid-cols-2">
+          <div>
+            <p className="font-display text-3xl font-extrabold">
+              Just<span className="text-brand">Bay</span>
+            </p>
+            <p className="mt-4 max-w-sm text-sm text-dark-foreground/55">
+              The trusted digital marketplace for Eastern Nigeria.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-6 text-sm">
+            <div className="space-y-3">
+              <b>Shop</b>
+              <Link to="/products" className="block text-dark-foreground/55 hover:text-dark-foreground transition-colors">All products</Link>
+              <Link to="/stores" className="block text-dark-foreground/55 hover:text-dark-foreground transition-colors">Local sellers</Link>
+              <Link to="/category/$category" params={{ category: "all" }} className="block text-dark-foreground/55 hover:text-dark-foreground transition-colors">Categories</Link>
+            </div>
+            <div className="space-y-3">
+              <b>Help</b>
+              <Link to="/help" className="block text-dark-foreground/55 hover:text-dark-foreground transition-colors">Support</Link>
+              <Link to="/track-order" className="block text-dark-foreground/55 hover:text-dark-foreground transition-colors">Track order</Link>
+              <Link to="/sell" className="block text-dark-foreground/55 hover:text-dark-foreground transition-colors">Sell on JustBay</Link>
+              <Link to="/admin" className="block text-dark-foreground/55 hover:text-dark-foreground transition-colors">Admin</Link>
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 border-t border-dark-foreground/10 pt-6 text-xs text-dark-foreground/45">
+          © {new Date().getFullYear()} JustBay.
+        </div>
+      </div>
+    </footer>
+  );
+}
