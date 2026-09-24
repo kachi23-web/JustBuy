@@ -13,6 +13,15 @@ export default defineConfig({
     // Disable CSS minification to avoid the incompatibility.
     cssMinify: false,
   },
+  environments: {
+    // Bundle ALL dependencies into the server output so it is fully
+    // self-contained — no node_modules needed at runtime on Vercel.
+    ssr: {
+      resolve: {
+        noExternal: true,
+      },
+    },
+  },
   plugins: [
     // Resolves the @/* path alias from tsconfig.json in Vite's module resolver.
     tsconfigPaths(),
