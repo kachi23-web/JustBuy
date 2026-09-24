@@ -4,12 +4,14 @@
  *
  * Structure produced:
  *   .vercel/output/
- *     config.json          — Vercel routing config
- *     static/              — copied from dist/client (served by CDN)
+ *     config.json
+ *     static/                  ← dist/client contents
  *     functions/
- *       index.func/        — SSR catch-all serverless function
+ *       index.func/
  *         .vc-config.json
- *         index.js         — re-exports dist/server/server.js handler
+ *         package.json         ← "type":"module" so Node treats .js as ESM
+ *         index.js             ← thin entry point
+ *         server/              ← dist/server copied in (self-contained)
  */
 
 import { cpSync, mkdirSync, writeFileSync } from "fs";
@@ -21,24 +23,31 @@ const root = __dirname;
 
 const vercelOut = resolve(root, ".vercel/output");
 const staticOut = resolve(vercelOut, "static");
-const fnDir = resolve(vercelOut, "functions/index.func");
+const fnDir    = resolve(vercelOut, "functions/index.func");
 
-// 1. Create directories
+// 1. Create output directories
 mkdirSync(staticOut, { recursive: true });
-mkdirSync(fnDir, { recursive: true });
+mkdirSync(fnDir,    { recursive: true });
 
-// 2. Copy static client assets → .vercel/output/static
+// 2. Copy static client assets → .vercel/output/static (served by CDN)
 cpSync(resolve(root, "dist/client"), staticOut, { recursive: true });
 
-// 3. Write the serverless function entry that re-exports the SSR handler
+// 3. Copy server bundle INTO the function directory so it's self-contained
+cpSync(resolve(root, "dist/server"), resolve(fnDir, "server"), { recursive: true });
+
+// 4. Thin entry point — imports from the local ./server copy
 writeFileSync(
   resolve(fnDir, "index.js"),
-  `import handler from "../../dist/server/server.js";
-export default handler;
-`,
+  `import handler from "./server/server.js";\nexport default handler;\n`,
 );
 
-// 4. Write function config — Node.js 20, edge-compatible fetch handler
+// 5. package.json inside the function so Node.js loads .js files as ESM
+writeFileSync(
+  resolve(fnDir, "package.json"),
+  JSON.stringify({ type: "module" }, null, 2),
+);
+
+// 6. Vercel function config
 writeFileSync(
   resolve(fnDir, ".vc-config.json"),
   JSON.stringify(
@@ -53,30 +62,23 @@ writeFileSync(
   ),
 );
 
-// 5. Write top-level Vercel routing config:
-//    - Static files (assets, public files) served directly from CDN
-//    - Everything else → SSR function
+// 7. Top-level routing config
 writeFileSync(
   resolve(vercelOut, "config.json"),
   JSON.stringify(
     {
       version: 3,
       routes: [
-        // Static assets (hashed, long cache)
+        // Long-cache hashed assets
         {
           src: "^/assets/(.*)$",
           headers: { "cache-control": "public, max-age=31536000, immutable" },
           continue: true,
         },
-        // Public files (favicon, robots, etc.)
-        {
-          handle: "filesystem",
-        },
-        // SSR catch-all
-        {
-          src: "/(.*)",
-          dest: "/index",
-        },
+        // Serve files that exist on the CDN directly (favicon, robots, etc.)
+        { handle: "filesystem" },
+        // Everything else → SSR function
+        { src: "/(.*)", dest: "/index" },
       ],
     },
     null,
@@ -84,4 +86,4 @@ writeFileSync(
   ),
 );
 
-console.log("✓ Vercel output assembled at .vercel/output");
+console.log("✓ Vercel Build Output assembled at .vercel/output");
